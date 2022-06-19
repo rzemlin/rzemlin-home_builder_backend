@@ -13,7 +13,7 @@ class Api::V1::CommentsController < ApplicationController
     room = Room.find_by(id: params[:room_id])
     comment = room.build(comment_params)
     if comment.save
-      render json: comment, status: :accepted
+      render json: CommentSerializer.new(comment), status: :accepted
     else
       resp = {
         error: comment.errors.full_messages.to_sentence,
@@ -25,9 +25,9 @@ class Api::V1::CommentsController < ApplicationController
   def update
     comment = Comment.find_by(id: params[:id])
     if comment.update(comment_params)
-      render json: comment
+      render json: CommentSerializer.new(comment)
     else
-      render json: log.errors, status: :unprocessable_entity
+      render json: comment.errors, status: :unprocessable_entity
     end
   end
 

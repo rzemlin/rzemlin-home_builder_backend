@@ -1,18 +1,18 @@
 class Api::V1::RoomsController < ApplicationController
   def index
     rooms = Room.all
-    render json: rooms, include: ["plans", "plans.todos", "comments"]
+    render json: RoomSerializer.new(rooms)
   end
 
   def show
     room = Room.find(params[:id])
-    render json: room, include: ["plans", "plans.todos", "comments"]
+    render json: RoomSerializer.new(room)
   end
 
   def create
     room = Room.create(room_params)
     if room.save
-      render json: room, status: :accepted
+      render json: RoomSerializer.new(room), status: :accepted
     else
       resp = {
         error: room.errors.full_messages.to_sentence,
@@ -25,7 +25,7 @@ class Api::V1::RoomsController < ApplicationController
     rooms = Room.all
     room = Room.find(params[:id])
     room.destroy
-    render json: rooms, include: ["plans", "plans.todos", "comments"]
+    render json: RoomSerializer.new(rooms)
   end
 
   private
