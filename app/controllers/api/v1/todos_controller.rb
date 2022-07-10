@@ -11,7 +11,7 @@ class Api::V1::TodosController < ApplicationController
 
   def create
       plan = Plan.find_by(id: params[:plan_id])
-      todo = plan.todo.build(todo_params)
+      todo = plan.todos.build(todo_params)
       if todo.save
           render json: todo, status: :accepted
      else
