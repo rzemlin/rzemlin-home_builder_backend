@@ -1,6 +1,6 @@
-class PlanSerializer
-  include FastJsonapi::ObjectSerializer
-  attributes :id, :description
+class GoalSerializer < ActiveModel::Serializer
+  attributes :id, :description, :todos
   belongs_to :room
-  has_many :to_dos
+  has_many :todos
+
 end
