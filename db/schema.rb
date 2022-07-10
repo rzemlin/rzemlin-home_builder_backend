@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_19_005926) do
+ActiveRecord::Schema.define(version: 2022_07_08_204129) do
 
   create_table "comments", force: :cascade do |t|
     t.string "content"
@@ -34,15 +34,15 @@ ActiveRecord::Schema.define(version: 2022_06_19_005926) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "to_dos", force: :cascade do |t|
+  create_table "todos", force: :cascade do |t|
     t.string "description"
     t.integer "plan_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["plan_id"], name: "index_to_dos_on_plan_id"
+    t.index ["plan_id"], name: "index_todos_on_plan_id"
   end
 
   add_foreign_key "comments", "rooms"
   add_foreign_key "plans", "rooms"
-  add_foreign_key "to_dos", "plans"
+  add_foreign_key "todos", "plans"
 end
